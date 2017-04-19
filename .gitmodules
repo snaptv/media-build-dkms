@@ -1,0 +1,3 @@
+[submodule "media_build"]
+	path = media_build
+	url = git://linuxtv.org/media_build.git

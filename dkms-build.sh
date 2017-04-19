@@ -145,7 +145,7 @@ BUILD_EXCLUSIVE_KERNEL='^$KERNEL_VERSION'" > dkms.conf
 
     mkdir -p $LIB_DIR/$KERNEL_VERSION_ARCH/module
     for MODULE in $(find $LIB_DIR -type f | egrep '\.ko$'); do
-        mv $MODULE $LIB_DIR/$KERNEL_VERSION_ARCH/module
+        [ "$(dirname $MODULE)" == "$LIB_DIR/$KERNEL_VERSION_ARCH/module" ] || mv $MODULE $LIB_DIR/$KERNEL_VERSION_ARCH/module
     done
     dkms mkdeb $ID -k $KERNEL_VERSION_ARCH --binaries-only
 

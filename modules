@@ -1,0 +1,6 @@
+dvb-core
+media
+saa7164
+tveeprom
+v4l2-common
+videodev

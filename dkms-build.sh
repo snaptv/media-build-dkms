@@ -3,8 +3,8 @@
 # configuration
 
 NAME=snaptv-media-build
-sub_repo=media_build
-no_option_cmds="ifprdx"
+sub_repo=$(git submodule status | awk '{print $2}')
+no_option_cmds="icfprdx"
 KERNEL_VERSION=3.13.0-61-lowlatency
 KERNEL_ARCH=x86_64
 build_command="./build"
@@ -44,17 +44,7 @@ function leave {
 
 [ "$EUID" -ne 0 ] && leave "Please run as root"
 
-function do_clean {
-    pushd $sub_repo
-    git clean -f
-    git clean -fd
-    git clean -fX
-    git reset --hard
-    git checkout .
-    popd
-}
-
-[[ $cmds =~ c ]] && do_clean
+[[ $cmds =~ c ]] && sudo git submodule deinit -f .
 
 if [[ $cmds =~ i ]]; then
     apt-get update
@@ -77,8 +67,6 @@ fi
 if [[ $cmds =~ f ]]; then
     git submodule init
     git submodule update
-    sed 's/LATEST\.tar/2017-02-22-e6b377dbbb94\.tar/g' < $sub_repo/linux/Makefile > tmp
-    mv tmp $sub_repo/linux/Makefile
 fi
 
 LONGVER=$(snap-make-changelog -c | head -1)

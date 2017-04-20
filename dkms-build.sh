@@ -3,11 +3,12 @@
 # configuration
 
 NAME=snaptv-media-build
+build_command="./build"
+
 sub_repo=$(git submodule status | awk '{print $2}')
-no_option_cmds="icfprdx"
+no_option_cmds="cfprdx"
 KERNEL_VERSION=3.13.0-61-lowlatency
 KERNEL_ARCH=x86_64
-build_command="./build"
 
 [ $# -ne 0 ] && cmds=$1 || cmds=$no_option_cmds
 helptext='
@@ -33,7 +34,7 @@ Arguments:
   icfprdxz: Any combination of these command letters might be used
 
 Example:
-  sudo ./dkms-build.sh fprdxv
+  sudo ./dkms-build.sh cfprdxz
 
 '
 [[ $cmds =~ h ]] && exit
@@ -44,7 +45,16 @@ function leave {
 
 [ "$EUID" -ne 0 ] && leave "Please run as root"
 
-[[ $cmds =~ c ]] && sudo git submodule deinit -f .
+function do_clean {
+    [ -e $1 ] && rm -r $1
+    mkdir -p $1
+}
+
+[[ $cmds =~ c ]] && do_clean $sub_repo
+
+if [[ $cmds =~ r ]]; then
+    [ $(dpkg --print-avail snaptv-package-builder | grep -i 'not available') ] && cmd="i$cmd"
+fi
 
 if [[ $cmds =~ i ]]; then
     apt-get update

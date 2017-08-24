@@ -71,7 +71,9 @@ if [[ $cmds =~ f ]]; then
     [ -e $sub_repo ] && rm -r $sub_repo
     git submodule update --init
     pushd $sub_repo
-    git reset --hard
+    git branch -D master
+    git branch master
+    git checkout master
     popd
 fi
 

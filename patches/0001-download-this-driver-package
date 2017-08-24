@@ -8,8 +8,8 @@ index 9767b92..9a8e46f 100644
  TODAY_TAR_MD5 := ${TODAY_TAR}.bz2.md5
 -LATEST_TAR := http://linuxtv.org/downloads/drivers/linux-media-LATEST.tar.bz2
 -LATEST_TAR_MD5 := http://linuxtv.org/downloads/drivers/linux-media-LATEST.tar.bz2.md5
-+LATEST_TAR := http://linuxtv.org/downloads/drivers/linux-media-2017-04-19-3622d3e77ece.tar.bz2
-+LATEST_TAR_MD5 := http://linuxtv.org/downloads/drivers/linux-media-2017-04-19-3622d3e77ece.tar.bz2.md5
-
++LATEST_TAR := http://linuxtv.org/downloads/drivers/linux-media-2017-02-22-e6b377dbbb94.tar.bz2
++LATEST_TAR_MD5 := http://linuxtv.org/downloads/drivers/linux-media-2017-02-22-e6b377dbbb94.tar.bz2.md5
+ 
  default:
  	make -C ..

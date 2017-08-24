@@ -80,7 +80,7 @@ LONGVER=$(snap-make-changelog -c | head -1)
 pushd $sub_repo
 
 HASH=$(git describe --tag --always HEAD)
-VERSION=$(echo $HASH | sed 's/-g.......$//')
+VERSION="0-"$(echo $HASH | sed 's/-g.......$//')
 
 KERNEL_VERSION_ARCH=$KERNEL_VERSION/$KERNEL_ARCH
 FULL_VERSION=$VERSION-snaptv-$LONGVER

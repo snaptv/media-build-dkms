@@ -70,6 +70,9 @@ fi
 if [[ $cmds =~ f ]]; then
     [ -e $sub_repo ] && rm -r $sub_repo
     git submodule update --init
+    pushd $sub_repo
+    git reset --hard
+    popd
 fi
 
 LONGVER=$(snap-make-changelog -c | head -1)
